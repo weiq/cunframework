@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>测试简单初始化一个地图</title>
+<meta name="description" content="Source code generated using layoutit.com">
+<meta name="author" content="LayoutIt!">
+<link rel="stylesheet" href="../lib/ol/ol.css" type="text/css">
+<style type="text/css">
+.map {
+  height: 400px;
+  width: 100%;
+}
+</style>
+</head>
+<body>
+	<h2>我的地图</h2>
+    <div id="map" class="map"></div>
+</body>
+
+<script src="../lib/ol/ol.js"></script>
+<script src="../Tiny.js"></script>
+<script src="../core/Util.js"></script>
+<script src="../core/Class.js"></script>
+<script src="../core/Events.js"></script>
+<script src="../core/Handler.js"></script>
+
+<script src="../map/Map.js"></script>
+<script src="../layer/Layer.js"></script>
+<script type="text/javascript">
+(function(){
+    var map = T.map('map').setView([45.7441, 126.7023], 13);
+    
+    map.addLayer();
+    
+    map.on("mapload",function(){
+        console.log("地图载入开始");
+    });
+    
+    map.on("maploaded",function(){
+        console.log("地图载入完成");
+    });
+    
+    map.on("layersload",function(){
+        console.log("层载入开始");
+    });
+    
+    map.on("layersloaded",function(){
+        console.log("层载入完成");
+    });
+})();
+</script>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cunframework Map4J - a Map's tiny wrap</title>
+	<meta charset="utf-8" />
+	<meta itemprop="name" content="Map4J">
+	<meta itemprop="description" content="Cunframework Map4J - a Map's tiny wrap.">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+	<link href="css/github-gist.css" rel="stylesheet" />
+	<link href="css/welcome.css" rel="stylesheet" />
+	<script src="highlight.pack.js"></script>
+</head>
+<body>
+	<h1>
+		<a href="#"><img src="images/logo.png" alt="Map4J" width="300" /></a>
+	</h1>
+	<h3 class="tagline">
+		极简的JavaScript API开发接口,功能强大的瓦片集合<br>for OpenLayers3,Leaflet,GMap.Net,OpenSource
+	</h3>
+
+	<ul class="nav">
+		<li>
+			<span>概览</span>
+		</li>
+		<li>
+			<a href="#">教程</a>
+		</li>
+		<li>
+			<a href="#">文档</a>
+		</li>
+		<li>
+			<a href="#">关于</a>
+		</li>
+	</ul>
+
+	<div class="container">
+	
+		<p>Map4J 是一个极简的JavaScript库(参考了Leaflet,及OL3等),并且集成了一个功能强大的<a href="download.html">地图查看</a>工具(参考了GMap.Net),同时支持移动平台APP的地图包装.
+		它有你需要的每一个 <a href="#features">功能</a>.</p>
+	
+		<p>Map4J 的设邓初衷是为了提供一个 <em>simplicity</em>, <em>performance</em> 和 <em>usability</em> 的前端API,
+		以及一个能 <em>browser</em>，及 <em>cache</em>任意地图瓦片的后端程序.
+		
+		使用说明请见<a href="#">JavaScript API</a>
+		若想获得源码请到&nbsp;<a href="#">source code</a>, 欢迎对它进行补充和完善.</p>
+	
+	<div id="map" class="map map-home" style="height: 300px; margin-top: 50px"></div>
+	
+	<p>我们创建了一个地图 ,绑定到id值为<code>'map'</code>的div上, 点击地图中的marker可以弹出popup窗口</p>
+	
+	<pre class="basic-code javascript">
+	<code>
+    var map = T.map('map').setView([126.7023, 45.7441], 12);
+    
+    var map4J = new T.map4JTile(
+    	'http://192.168.138.25:8080/geo/google/road/L{z}/R{y}/C{x}.png');
+    
+    map.addLayer(map4J);
+    
+    T.marker([51.5, -0.09]).addTo(map)
+	    .bindPopup('A pretty CSS3 popup.&lt;br&gt; Easily customizable.')
+	    .openPopup();
+    </code>
+	</pre>
+
+	<p>参考Google Map加载方式,在页面中只需引入一个地图核心文件<code>&lt;script src="http://ip/api?v=2.0"&gt;&lt;/script&gt;</code>,
+	无需手动引入其它脚本文件,可指定加载指定版本API或自动加载最新版本.避免了一个库引入多份程序</p>
+	<p>了解更多请看 <a href="#">快速开始</a>, 或者看更多 <a href="#">示例</a>,
+	如果您有其它任何问题或好的建议请发 <a href="#">邮件</a>.</p>
+</div>
+
+<div class="footer">
+	<div class="container">
+		<h2 id="features">功能</h2> 
+		
+		<h4>更多功能正在开发中. <em>coming soon</em>.</h4>
+		
+		<div class="features clearfix">
+		    <div class="no-break">
+		        <h3>多种瓦片的支持</h3>
+		
+		        <ul>
+		            <li>Tile layers, WMS</li>
+		            <li>Markers, Popups</li>
+		            <li>Vector layers<span class="quiet">: polylines, polygons, circles, rectangles</span></li>
+		            <li>Image overlays</li>
+		            <li>GeoJSON</li>
+		        </ul>
+		    </div>
+		    
+		    <div class="no-break">
+				<div class="lemon-walk"></div>
+			</div>
+		
+		    <div class="no-break">
+		        <h3>要素的交互</h3>
+		
+		        <ul>
+		            <li>拖动线性平移</li>
+		            <li>滚轮缩放</li>
+		            <li>双指捏缩放</li>
+		            <li>双击缩放</li>
+		        </ul>
+		    </div>
+		
+		    <div class="no-break">
+		        <h3>瓦片缓存</h3>
+		
+		        <ul>
+		            <li>普通地图</li>
+		            <li>卫星地图</li>
+		            <li>混合地图</li>
+		            <li>地图缓存</li>
+		        </ul>
+		    </div>
+		
+		    <div class="no-break">
+		        <h3>浏览器支持</h3>
+		
+		        <ul>
+		            <li>Chrome</li>
+		            <li>Firefox</li>
+		            <li>Safari 5+</li>
+		            <li>Opera 12+</li>
+		            <li>IE 7&ndash;11</li>
+		        </ul>
+		    </div>
+		
+		    <div class="no-break">
+		        <h3>移动端</h3>
+		
+		        <ul>
+		            <li>Safari for iOS 7+</li>
+		            <li>Android browser 2.2+,&nbsp;3.1+,&nbsp;4+</li>
+		            <li>Chrome for mobile</li>
+		            <li>Firefox for mobile</li>
+		            <li>IE10+ for Win8 devices</li>
+		        </ul>
+		    </div>
+		</div>
+	</div>
+	<div>
+		<p>&copy; 2015 <a href="#">weiq</a>, map4j for cunframework.</p>
+	</div>
+</div>
+
+<nav class="ext-links">
+  <a class="ext-link github" href="https://github.com/weiq" title="View Source on GitHub"><img alt="View Source on GitHub" src="images/github-round.png" width="46" /></a>
+</nav>
+<script>
+	hljs.configure({tabReplace: '    '});
+	hljs.initHighlighting();
+</script>
+
+<link rel="stylesheet" href="../tiny/lib/ol/ol.css" type="text/css">
+<script src="../tiny/lib/ol/ol-debug.js"></script>
+<script src="../tiny/Tiny.js"></script>
+<script src="../tiny/core/Util.js"></script>
+<script src="../tiny/core/Class.js"></script>
+<script src="../tiny/core/Events.js"></script>
+<script src="../tiny/core/Handler.js"></script>
+
+<script src="../tiny/map/Map.js"></script>
+<script src="../tiny/layer/Layer.js"></script>
+<script src="../tiny/layer/tile/Map4JTile.js"></script>
+<script type="text/javascript">
+(function(){
+    var map = T.map('map').setView([126.7023, 45.7441], 12);
+    
+    var map4J = new T.map4JTile('http://192.168.138.25:8080/geo/google/road/L{z}/R{y}/C{x}.png',{});
+    
+    map.addLayer(map4J);
+})();
+</script>
+</body>
+</html>

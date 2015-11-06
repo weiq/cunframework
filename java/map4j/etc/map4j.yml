@@ -1,0 +1,72 @@
+## map4j 配置文件.
+---
+
+#### 静态web资源
+
+# 静态web资源绑定到指定的URL上
+# 'what' 属性是资源文件路径,可以是绝对路径或者是相对路径,相对于map4j.jar目录
+static-resources-mounts:
+    - what: D:\mapTile
+      where: /geo
+      welcome-file: geo.html
+
+#### Web Socket资源
+
+# MapDownloadsHandler 实现了一个websocket通信 通知下载状态
+websocket-mounts:
+    - what: org.cunframework.sc.map4j.support.handle.map.MapDownloadsHandler
+      where: /mapDownload
+      
+#### 应用逻辑
+
+# PingHandler 绑定到 /_logic/ping 实现了一个简单的Ping服务状态
+application-logic-mounts:
+    - what: org.cunframework.sc.map4j.support.handle.applicationlogic.PingHandler
+      where: /ping
+      secured: false
+      args:
+          msg: "hi. from MAP4J!"
+# 增加一个logic
+#   - what: xxx.xxx
+#     where: /ic
+#     secured: true
+
+#listener 配置 protocol, ip, port
+http-listener: true
+http-host: 0.0.0.0
+http-port: 8080
+
+ajp-listener: false
+ajp-host: 0.0.0.0
+ajp-port: 8009
+
+# enable-log-console: true => 写日志到控制台 
+# enable-log-file: true => 写日志到文件
+# log-file-path: 指定日志文件路径 (default value: map4j.log)
+# log-level: 指定日志级别. OFF, ERROR, WARN, INFO, DEBUG, TRACE 和 ALL. (默认值是 INFO)
+
+enable-log-file: false
+#log-file-path: D:/map4j.log
+enable-log-console: true
+log-level: INFO
+
+# 建议值: core*16
+worker-threads: 8 
+
+# 限制服务的并发请求的最大数目
+requests-limit: 1000
+
+# 为非阻塞任务创建的I/O线程的数目.至少2.建议值：核心*2
+io-threads: 2 
+
+# 建议值: 核心*16
+worker-threads: 8 
+
+#使用16K缓冲区以获得最佳性能
+buffer-size: 16384
+buffers-per-region: 20
+#
+direct-buffers: true
+
+#瓦片缓存路径
+tile-path: D:\mapTile

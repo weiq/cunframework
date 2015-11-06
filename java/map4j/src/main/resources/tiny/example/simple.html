@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>测试简单初始化一个地图</title>
+<meta name="description" content="Source code generated using layoutit.com">
+<meta name="author" content="LayoutIt!">
+<link rel="stylesheet" href="../lib/ol/ol.css" type="text/css">
+<script type="text/javascript" src="http://127.0.0.1:8080/map/api?ver=1.0&dev=1"></script>
+<style type="text/css">
+.map {
+  height: 400px;
+  width: 100%;
+}
+</style>
+</head>
+<body>
+	<h2>我的地图</h2>
+    <div id="map" class="map"></div>
+</body>
+
+<script type="text/javascript">
+(function(){
+    var map = T.map('map').setView([126.7023, 45.7441], 8);
+    
+    var osm = new T.osmTile();
+    
+    map.addLayer(osm);
+})();
+</script>
+</html>

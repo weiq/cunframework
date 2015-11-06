@@ -1,0 +1,215 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.cunframework</groupId>
+		<artifactId>cunframework-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../../modules/parent/</relativePath>
+	</parent>
+	<groupId>org.cunframework.java</groupId>
+	<artifactId>map4j</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>Cunframework Java Map4J</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+             
+		<!-- 脚本及样式表文件 -->
+		<css.ol>tiny/lib/ol/ol.css</css.ol>
+		<css.tiny>tiny/style/tiny.css</css.tiny>
+		<js.ol>tiny/lib/ol/ol.js</js.ol>
+		<js.tiny>tiny/Tiny.js</js.tiny>
+		<js.tiny.util>tiny/core/Util.js</js.tiny.util>
+		<js.tiny.class>tiny/core/Class.js</js.tiny.class>
+		<js.tiny.events>tiny/core/Events.js</js.tiny.events>
+		<js.tiny.handler>tiny/core/Handler.js</js.tiny.handler>
+		<js.tiny.map>tiny/map/Map.js</js.tiny.map>
+		<js.tiny.layer>tiny/layer/Layer.js</js.tiny.layer>
+		<js.tiny.tile.osm>tiny/layer/tile/OSMTile.js</js.tiny.tile.osm>
+		<js.tiny.tile.map4j>tiny/layer/tile/Map4JTile.js</js.tiny.tile.map4j>
+		<js.tiny.tile.mapguide>tiny/layer/tile/MapGuideTile.js</js.tiny.tile.mapguide>
+		<!-- 脚本及样式表文件 -->
+		<!-- 压缩后的文件 -->
+		<build.css.tiny>tiny/build/tiny.css</build.css.tiny>
+		<build.js.tiny>tiny/build/tiny.js</build.js.tiny>
+		<comp.css.tiny>tiny/build/tiny.min.css</comp.css.tiny>
+		<comp.js.tiny>tiny/build/tiny.min.js</comp.js.tiny>
+		<!-- 压缩后的文件 -->
+	</properties>
+
+	<!-- 依赖项定义 -->
+	<dependencies>
+		<!-- Cunframework utils -->
+		<dependency>
+			<groupId>org.cunframework</groupId>
+			<artifactId>cunframework-utils</artifactId>
+		</dependency>
+		
+		<dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-core</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+        </dependency>
+        
+		<!-- Test -->
+		<dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+	</dependencies>
+	
+	<build>
+        <finalName>${project.artifactId}-${project.version}-nodeps</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.5.5</version>
+                <executions>
+                    <execution>
+                        <id>assemble-all</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <finalName>${project.artifactId}</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <attach>false</attach>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <mainClass>org.cunframework.sc.map4j.App</mainClass>
+                                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                    <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>bin</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <id>bin</id>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <finalName>${project.artifactId}-${project.version}</finalName>
+                            <descriptors>
+                                <descriptor>assembly.xml</descriptor>
+                            </descriptors>
+                            <attach>true</attach>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <archive>                   
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>org.cunframework.sc.map4j.App</mainClass>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <debug>true</debug>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+				<groupId>com.samaxes.maven</groupId>
+				<artifactId>minify-maven-plugin</artifactId>
+				<version>1.7.4</version>
+				<executions>
+					<execution>
+						<id>default-minify</id>
+						<configuration>
+							<cssSourceDir>../resources</cssSourceDir>
+			                <cssSourceFiles>
+                                <cssSourceFile>${css.ol}</cssSourceFile>
+			                    <cssSourceFile>${css.tiny}</cssSourceFile>
+                            </cssSourceFiles>
+                            <cssTargetDir>../classes/tiny/build</cssTargetDir>
+                			<cssFinalFile>tiny.css</cssFinalFile>
+                            
+                            <jsSourceDir>../resources</jsSourceDir>
+                            <jsSourceFiles>
+                                <jsSourceFile>${js.ol}</jsSourceFile>
+			                    <jsSourceFile>${js.tiny}</jsSourceFile>
+			                    <jsSourceFile>${js.tiny.util}</jsSourceFile>
+			                    <jsSourceFile>${js.tiny.class}</jsSourceFile>
+			                    <jsSourceFile>${js.tiny.events}</jsSourceFile>
+			                    <jsSourceFile>${js.tiny.handler}</jsSourceFile>
+			                    <jsSourceFile>${js.tiny.map}</jsSourceFile>
+			                    <jsSourceFile>${js.tiny.layer}</jsSourceFile>
+			                    <jsSourceFile>${js.tiny.tile.osm}</jsSourceFile>
+			                    <jsSourceFile>${js.tiny.tile.map4j}</jsSourceFile>
+			                    <jsSourceFile>${js.tiny.tile.mapguide}</jsSourceFile>
+                            </jsSourceFiles>
+                            <jsTargetDir>../classes/tiny/build</jsTargetDir>
+                            <jsFinalFile>tiny.js</jsFinalFile>
+			            </configuration>
+						<goals>
+							<goal>minify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+        </plugins>
+        
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>

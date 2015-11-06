@@ -1,0 +1,34 @@
+#### JavaScript 原文件
+source-js:
+    ol: ${js.ol}
+    tiny: ${js.tiny}
+    tiny.util: ${js.tiny.util}
+    tiny.class: ${js.tiny.class}
+    tiny.events: ${js.tiny.events}
+    tiny.handler: ${js.tiny.handler}
+    tiny.map: ${js.tiny.map}
+    tiny.layer: ${js.tiny.layer}
+    layer.osm: ${js.tiny.tile.osm}
+    layer.map4j: ${js.tiny.tile.map4j}
+    layer.mapguide: ${js.tiny.tile.mapguide}
+
+#### CSS 原文件
+source-css:
+    ol: ${css.ol}
+    tiny: ${css.tiny}
+
+### 合并后的JS文件    
+build-js:
+    tiny: ${build.js.tiny}
+    
+### 合并后的CSS文件    
+build-css:
+    tiny: ${build.css.tiny}
+    
+### 压缩后的JS文件    
+comp-js:
+    tiny: ${comp.js.tiny}
+    
+### 压缩后的CSS文件    
+comp-css:
+    tiny: ${comp.css.tiny}

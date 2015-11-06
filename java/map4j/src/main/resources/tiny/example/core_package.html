@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>测试Tiny core包下的功能用法</title>
+
+<meta name="description" content="Source code generated using layoutit.com">
+<meta name="author" content="LayoutIt!">
+<script src="../Tiny.js"></script>
+<script src="../core/Util.js"></script>
+
+<style type="text/css">
+</style>
+
+</head>
+<script type="text/javascript">
+	(function(){
+	    
+	    //亲测  T.extend
+	    var src = {
+	    	zhang: 1,
+	    	wang: 2,
+	    	li: 3
+	    };
+	    
+	    var desc = {
+	        zhao: 4
+	    };
+	    
+	    T.extend(desc, src);
+	    console.log(JSON.stringify(desc));
+	    //亲测  T.extend
+	    
+	    //亲测  T.bind
+	    function me(){
+	        this.myName = "z";
+	        this.say = function(){
+	            console.log(this.myName);
+	        }
+	    }
+	    
+	    function to(){
+	        this.myName = "y";
+	    }
+	    
+	    var _me = new me();
+	    var _to = new to();
+	    var say = T.bind(_me.say, _to);
+	    _me.say(); //未绑定
+	    say();     //绑定后
+	    //亲测 T.bind
+	    
+	    //亲测T.Util.getParamString
+	    var param = {
+	    	age: 18,
+	    	name: '张三',
+	    	address: 'nima'
+	    };
+	    var url = 'http://ooo.xxx/com';
+	    var url1 = 'http://ooo.xxx/com?a=1';
+	    
+	    console.log(T.Util.getParamString(param,url,true));
+	    console.log(T.Util.getParamString(param,url1,false));
+	    //亲测T.Util.getParamString
+	    
+	    //亲测T.Util.template
+	    var tUrl = "http://ooo.xxx/com/?z={z}&x={x}&y={y}";
+	    var t = T.Util.template(tUrl, {
+			y: 111,
+			x: 222,
+			z: 6
+		});
+		console.log(t);
+	    //亲测T.Util.template
+	})();
+</script>
+<body>
+	
+</body>
+</html>

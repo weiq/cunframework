@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.cunframework</groupId>
+		<artifactId>cunframework-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../../modules/parent/</relativePath>
+	</parent>
+	<groupId>org.cunframework.web</groupId>
+	<artifactId>ipro</artifactId>
+	<packaging>war</packaging>
+	<name>Cunframework Web IPro</name>
+
+	<!-- 依赖项定义 -->
+	<dependencies>
+		<!-- Cunframework begin -->
+		<dependency>
+			<groupId>org.cunframework</groupId>
+			<artifactId>cunframework-core</artifactId>
+		</dependency>
+		<!-- Cunframework end -->
+		
+		<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        
+        <dependency>
+		  <groupId>postgresql</groupId>
+		  <artifactId>postgresql</artifactId>
+		</dependency>
+
+        <dependency>
+            <groupId>com.yahoo.platform.yui</groupId>
+            <artifactId>yuicompressor</artifactId>
+        </dependency>
+        
+        <dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
+		</dependency>
+		
+		<!-- web相关jar包 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+        <plugins>
+           <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                    <reload>manual</reload>
+                    <!--<scanIntervalSeconds>2</scanIntervalSeconds>-->
+                    <stopPort>9999</stopPort>
+                    <webAppConfig>
+                        <contextPath>/${project.build.finalName}</contextPath>
+                    </webAppConfig>
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>9080</port>
+                            <!--<maxIdleTime>60000</maxIdleTime>-->
+                        </connector>
+                    </connectors>
+                    <!-- spring profile  -->
+                    <systemProperties>
+                        <systemProperty>
+                            <name>spring.profiles.active</name>
+                            <value>development</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <port>9080</port>
+                    <path>/${project.build.finalName}</path>
+                    <!-- spring profile  -->
+                    <systemProperties>
+                        <systemProperty>
+                            <name>spring.profiles.active</name>
+                            <value>development</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.googlecode</groupId>
+                <artifactId>maven-db-plugin</artifactId>
+                <version>1.4</version>
+                <configuration>
+                    <adminDbConnectionSettings>
+                        <jdbcDriver>${connection.driver_class}</jdbcDriver>
+                        <jdbcUrl>${connection.admin.url}</jdbcUrl>
+                        <userName>${connection.username}</userName>
+                        <password>${connection.password}</password>
+                    </adminDbConnectionSettings>
+                    <appDbConnectionSettings>
+                        <jdbcDriver>${connection.driver_class}</jdbcDriver>
+                        <jdbcUrl>${connection.url}</jdbcUrl>
+                        <userName>${connection.username}</userName>
+                        <password>${connection.password}</password>
+                    </appDbConnectionSettings>
+                    <dbDataScriptsDirectory>
+                        <param>src/main/sql/data</param>
+                    </dbDataScriptsDirectory>
+                    <dbSchemaScriptsDirectory>
+                        <param>src/main/sql/schema</param>
+                    </dbSchemaScriptsDirectory>
+                    <dbUpdateScriptsDirectory>
+                        <param>src/main/sql/update</param>
+                    </dbUpdateScriptsDirectory>
+                    <dbCreateStatements>
+                        create database ${db.name} CHARACTER SET 'utf8';
+                    </dbCreateStatements>
+                    <dbDropStatements>drop database ${db.name}; </dbDropStatements>
+                    <sqlDelimiter>;;</sqlDelimiter>
+                    <scriptEncoding>UTF-8</scriptEncoding>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+	</build>
+	
+	<properties>
+    </properties>
+
+	<profiles>
+		<profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <db.name>ipro</db.name>
+                <connection.driver_class>com.mysql.jdbc.Driver</connection.driver_class>
+                <connection.admin.url>
+                    <![CDATA[jdbc:mysql://192.168.138.118:3306?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]>
+                </connection.admin.url>
+                <connection.url>
+                    <![CDATA[jdbc:mysql://192.168.138.118:3306/${db.name}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]>
+                </connection.url>
+                <connection.username>root</connection.username>
+                <connection.password>admin</connection.password>
+                <jpa.showSql>true</jpa.showSql>
+                <jpa.generateDdl>false</jpa.generateDdl>
+                <jpa.database>MYSQL</jpa.database>
+                <jpa.databasePlatform>org.hibernate.dialect.MySQL5InnoDBDialect</jpa.databasePlatform>
+                <log.dir>D:/Backup/cunframework</log.dir>
+
+                <shiro.uid.cookie.domain></shiro.uid.cookie.domain>
+                <shiro.uid.cookie.path>/</shiro.uid.cookie.path>
+
+            </properties>
+        </profile>
+        <profile>
+            <!-- integration test -->
+            <id>it</id>
+            <properties>
+                <db.name>ipro</db.name>
+                <connection.driver_class>com.mysql.jdbc.Driver</connection.driver_class>
+                <connection.admin.url>
+                    <![CDATA[jdbc:mysql://192.168.138.118:3306?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]>
+                </connection.admin.url>
+                <connection.url>
+                    <![CDATA[jdbc:mysql://192.168.138.118:3306/${db.name}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]>
+                </connection.url>
+                <connection.username>root</connection.username>
+                <connection.password>admin</connection.password>
+                <jpa.showSql>true</jpa.showSql>
+                <jpa.generateDdl>false</jpa.generateDdl>
+                <jpa.database>MYSQL</jpa.database>
+                <jpa.databasePlatform>org.hibernate.dialect.MySQL5InnoDBDialect</jpa.databasePlatform>
+                <log.dir>D:/Backup/cunframework</log.dir>
+
+                <shiro.uid.cookie.domain></shiro.uid.cookie.domain>
+                <shiro.uid.cookie.path>/</shiro.uid.cookie.path>
+
+
+            </properties>
+        </profile>
+
+        <profile>
+            <!--正式环境-->
+            <id>production</id>
+            <properties>
+                <db.name>ipro</db.name>
+                <connection.driver_class>com.mysql.jdbc.Driver</connection.driver_class>
+                <connection.admin.url>
+                    <![CDATA[jdbc:mysql://192.168.138.118:3306?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]>
+                </connection.admin.url>
+                <connection.url>
+                    <![CDATA[jdbc:mysql://192.168.138.118:3306/${db.name}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]>
+                </connection.url>
+                <connection.username>root</connection.username>
+                <connection.password>admin</connection.password>
+                <jpa.showSql>true</jpa.showSql>
+                <jpa.generateDdl>false</jpa.generateDdl>
+                <jpa.database>MYSQL</jpa.database>
+                <jpa.databasePlatform>org.hibernate.dialect.MySQL5InnoDBDialect</jpa.databasePlatform>
+                <log.dir>D:/Backup/cunframework</log.dir>
+
+                <shiro.uid.cookie.domain></shiro.uid.cookie.domain>
+                <shiro.uid.cookie.path>/</shiro.uid.cookie.path>
+
+            </properties>
+        </profile>
+	</profiles>
+</project>

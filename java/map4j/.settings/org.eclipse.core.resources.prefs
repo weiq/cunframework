@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/java/org/cunframework/sc/map4j/core/internals/PureImage.java=UTF-8
+encoding//src/main/java/org/cunframework/sc/map4j/core/internals/PureImageProxy.java=UTF-8
+encoding//src/main/java/org/cunframework/sc/map4j/core/internals/TileStatus.java=UTF-8
+encoding//src/main/java/org/cunframework/sc/map4j/core/projections=UTF-8
+encoding//src/main/java/org/cunframework/sc/map4j/core/providers/google/GoogleTerrainMapProvider.java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/test/java=UTF-8
+encoding/<project>=UTF-8
