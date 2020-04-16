@@ -29,5 +29,4 @@ Web下有一个尚未完成的后台管理项目.
 * TinyHttp, 一个基于回调机制的多线程异步Http连接框架
 * 还有许多...
 
-### source code: https://git.oschina.net/wiqi/cunframework
 ### email: 78844479@qq.com
