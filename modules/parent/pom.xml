@@ -57,7 +57,7 @@
 
 		<jts.version>1.11</jts.version>
 		<postgresql.version>9.1-901.jdbc4</postgresql.version>
-		<mysql.version>5.1.27</mysql.version>
+		<mysql.version>8.0.16</mysql.version>
         <yui.compressor.version>2.4.2</yui.compressor.version>
 
 		<javassist.version>3.18.0-GA</javassist.version>
