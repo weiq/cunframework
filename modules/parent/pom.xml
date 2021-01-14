@@ -32,7 +32,7 @@
 		<common.compress.version>1.6</common.compress.version>
 		<ant.version>1.9.2</ant.version>
 		<dozer.version>5.5.1</dozer.version>
-		<poi.version>3.9</poi.version>
+		<poi.version>4.1.2</poi.version>
 		<sitemesh.version>2.4.2</sitemesh.version>
 
 		<junit.version>4.11</junit.version>
