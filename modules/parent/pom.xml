@@ -73,7 +73,7 @@
 		<fastjson.version>1.2.5</fastjson.version>
 		<jackson.version>2.4.0</jackson.version>
 
-		<httpclient.version>4.3.4</httpclient.version>
+		<httpclient.version>4.5.13</httpclient.version>
 
 		<dom4j.version>1.6.1</dom4j.version>
 		<joda-time.version>2.3</joda-time.version>
