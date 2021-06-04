@@ -84,7 +84,7 @@
 		
 		<undertow.version>1.2.12.Final</undertow.version>
 		
-		<yaml.version>1.16</yaml.version>
+		<yaml.version>1.26</yaml.version>
 		
 		<jsoup.version>1.7.3</jsoup.version>
 	</properties>
