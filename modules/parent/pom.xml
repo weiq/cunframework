@@ -50,7 +50,7 @@
 		<spring.version>4.1.6.RELEASE</spring.version>
 		<spring.data.jpa.version>1.6.0.RELEASE</spring.data.jpa.version>
 
-		<hibernate.core.version>4.3.5.Final</hibernate.core.version>
+		<hibernate.core.version>5.4.24.Final</hibernate.core.version>
 		<hibernate.ehcache.version>4.3.0.Final</hibernate.ehcache.version>
 		<hibernate.commons.annotaions.version>4.0.4.Final</hibernate.commons.annotaions.version>
 		<hibernate.validator.version>5.0.3.Final</hibernate.validator.version>
