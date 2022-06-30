@@ -80,7 +80,7 @@
 		<prettytime.version>3.2.3.Final</prettytime.version>
 		<jcaptcha.version>2.0-alpha-1</jcaptcha.version>
 		<pinyin4j.version>2.5.0</pinyin4j.version>
-		<itextpdf.version>5.4.3</itextpdf.version>
+		<itextpdf.version>5.5.12</itextpdf.version>
 		
 		<undertow.version>1.2.12.Final</undertow.version>
 		
