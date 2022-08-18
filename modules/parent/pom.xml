@@ -82,7 +82,7 @@
 		<pinyin4j.version>2.5.0</pinyin4j.version>
 		<itextpdf.version>5.4.3</itextpdf.version>
 		
-		<undertow.version>1.2.12.Final</undertow.version>
+		<undertow.version>2.2.19.Final</undertow.version>
 		
 		<yaml.version>1.16</yaml.version>
 		
