@@ -86,7 +86,7 @@
 		
 		<yaml.version>1.16</yaml.version>
 		
-		<jsoup.version>1.7.3</jsoup.version>
+		<jsoup.version>1.15.3</jsoup.version>
 	</properties>
 
 	<prerequisites>
