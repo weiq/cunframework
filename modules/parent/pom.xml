@@ -71,7 +71,7 @@
 
 		<druid.version>1.0.14</druid.version>
 		<fastjson.version>1.2.5</fastjson.version>
-		<jackson.version>2.4.0</jackson.version>
+		<jackson.version>2.13.4.1</jackson.version>
 
 		<httpclient.version>4.3.4</httpclient.version>
 
